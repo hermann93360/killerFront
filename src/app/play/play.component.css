@@ -1,0 +1,134 @@
+
+.content *{
+  color: white;
+}
+.banner {
+  background-image: url("../../assets/img/back.jpeg");
+  background-size: 1200px;
+  height: 100px;
+}
+
+.content_main_btn {
+  display: flex;
+  width: 100%;
+  border-bottom: 0.005cm solid #6f6f6f;
+}
+.btn {
+  width: 50%;
+  border: transparent;
+  background: transparent;
+  color: #a0a0a0;
+  border-bottom: 3px solid transparent;
+  font-family: interRegular;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+.btn:hover, .active {
+  border-bottom: 3px solid #f5cb5c;
+  color: white;
+  font-family: interRegular;
+}
+
+.content_createRoom {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 0.005cm solid #6f6f6f;
+}
+.icon img {
+  width: 45px;
+}
+.content_createRoom h5 {
+  font-family: comfortaBold, serif;
+  color: #c1c1c1;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.content_room > h5{
+  font-family: interBlack;
+  color: #6f6f6f;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 5px;
+}
+.content_room .rooms {
+  display: flex;
+  flex-direction: column;
+}
+.rooms .room {
+  border-bottom: 0.005cm solid #6f6f6f;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.room .text {
+  margin-left: 10px;
+}
+.text h5 {
+  font-size: 14px;
+  font-family: couture1;
+  color: #d5d5d5;
+  text-transform: uppercase;
+}
+.text p {
+  font-size: 11px;
+  font-family: interLight;
+  color: #6f6f6f;
+
+}
+.btn_join {
+  border: transparent;
+  color: white;
+  background-color: #f5cb5c;;
+  padding: 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-family: Couture;
+  font-size: 11px;
+  position: absolute;
+  right: 25px;
+}
+.create_room-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: black;
+  padding: 10px;
+  transform: translate(-50%, -50%);
+  box-shadow: -3px -1px 21px 7px rgba(46, 46, 46, 0.76);
+  -moz-box-shadow: -3px -1px 21px 7px rgba(46, 46, 46, 0.76);
+  -webkit-box-shadow: -3px -1px 21px 7px rgba(46, 46, 46, 0.76);
+  border-radius: 15px;
+
+}
+.create_room-box form {
+  display: flex;
+  flex-direction: column;
+}
+.create_room-box form .input {
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+  font-family: rockstar, serif;
+  padding: 17px;
+  width: 300px;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 17px;
+}
+.create_room-box form .btn {
+  background-color: #CFDBD5;
+  color: white;
+  font-family: rockstar;
+  padding: 17px;
+  border: transparent;
+  margin-top: 10px;
+  width: 300px;
+  font-size: 17px;
+
+}

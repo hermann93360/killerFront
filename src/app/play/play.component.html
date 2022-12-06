@@ -1,0 +1,38 @@
+<div class="content" xmlns="http://www.w3.org/1999/html">
+  <div class="banner">
+
+  </div>
+  <div class="content_main_btn">
+    <button class="btn playing"> JEUX </button>
+    <button class="btn Rules"> COMMENT JOUER </button>
+  </div>
+  <div class="content_createRoom" (click)="manageBoxCreateRoomBtn()">
+    <div class="icon">
+      <img src="assets/img/profil-man.png" />
+    </div>
+    <h5> Créer une salle de jeu </h5>
+  </div>
+  <div class="content_room">
+    <h5 class="text_rooms"> Liste des salles de jeu </h5>
+
+    <div class="rooms">
+      <div class="room" *ngFor="let item of roomsList">
+        <div class="icon">
+          <img src="assets/img/profil-man.png" />
+        </div>
+        <div class="text">
+          <h5> {{item.name}} </h5>
+          <p> {{item.numberOfUser}} / 6</p>
+        </div>
+        <button class="btn_join" (click)="joinRoom(item.id || 0)"> Rejoindre </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="create_room-box" *ngIf="displayBoxCreateRoom">
+  <form [formGroup]="addRoomForm" (submit)="addRoom()">
+    <input type="text" class="input" placeholder="Nom de la salle" formControlName="name">
+    <input type="submit" class="btn" value="Enregistrer">
+  </form>
+</div>

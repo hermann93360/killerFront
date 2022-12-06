@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "couture";
+  src: url('assets/fonts/couture.otf');
+}@font-face {
+  font-family: "comfortaBold";
+  src: url('assets/fonts/ComfortaBold.ttf');
+}@font-face {
+  font-family: "comfortaLight";
+  src: url('assets/fonts/ComfortaLight.ttf');
+}@font-face {
+  font-family: "couture1";
+  src: url('assets/fonts/couture1.otf');
+}@font-face {
+  font-family: "interBlack";
+  src: url('assets/fonts/InterBlack.otf');
+}@font-face {
+  font-family: "interLight";
+  src: url('assets/fonts/InterLight.otf');
+}@font-face {
+  font-family: "interRegular";
+  src: url('assets/fonts/InterRegular.otf');
+}@font-face {
+  font-family: "mont";
+  src: url('assets/fonts/mont.otf');
+}@font-face {
+  font-family: "montLight";
+  src: url('assets/fonts/montLight.otf');
+}@font-face {
+  font-family: "rockstar";
+  src: url('assets/fonts/rockstar.otf');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+p, h3, h5 {
+  margin: 0;
+}
+
+::placeholder {
+  color: #e2e2e2;
+}
+
+* {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}

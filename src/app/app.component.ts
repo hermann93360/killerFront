@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, HostListener, OnDestroy} from '@angular/core';
+import {WeksocketService} from "../services/weksocket.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'test';
+export class AppComponent implements OnDestroy{
+
+  ngOnDestroy(): void {
+  }
 }

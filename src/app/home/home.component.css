@@ -1,0 +1,49 @@
+.box_component {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.box_title{
+  font-family: "rockstar", serif;
+  font-size: 55px;
+  text-align: center;
+}
+.box_desc {
+  font-family: interLight, serif;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 2px;
+  width: 300px;
+}
+
+.box_form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input {
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+  font-family: rockstar, serif;
+  padding: 17px;
+  width: 300px;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 17px;
+}
+.btn {
+  background-color: #CFDBD5;
+  color: white;
+  font-family: rockstar;
+  padding: 17px;
+  border: transparent;
+  margin-top: 10px;
+  width: 300px;
+  font-size: 17px;
+
+}

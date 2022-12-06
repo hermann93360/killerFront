@@ -1,0 +1,115 @@
+<div class="box_component">
+
+  <div class="table" (click)="this.displayChatBoxPublic = false">
+
+    <div class="line-top">
+      <div class="player">
+        <div class="notification" *ngIf="displayNotification[0] == true">
+          <P> {{listChatNotification[0].message}} </P>
+        </div>
+        <img [src]=" 'assets/img/player/' + playerInTable[0]?.pathIcon || '' "  />
+        <p class="name-player">{{playerInTable[0]?.name}}</p>
+        <button *ngIf="playerInTable[0]?.id != -1 && playerInTable.length > 0 && playerInTable[0]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[0].id, playerInTable[0]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+      </div>
+    </div>
+
+    <div class="line-middle-1">
+      <div class="player">
+        <div class="notification" *ngIf="displayNotification[1] == true">
+          <P> {{listChatNotification[1].message}} </P>
+        </div>
+        <img [src]="'assets/img/player/' + playerInTable[1]?.pathIcon || '' " />
+        <p class="name-player">{{playerInTable[1]?.name}}</p>
+        <button *ngIf="playerInTable[1]?.id != -1 && playerInTable.length > 0 && playerInTable[1]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[1].id,playerInTable[1]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+      </div>
+      <div class="player">
+        <div class="notification" *ngIf="displayNotification[2] == true">
+          <P> {{listChatNotification[2].message}} </P>
+        </div>
+        <img [src]="'assets/img/player/' + playerInTable[2]?.pathIcon || '' " />
+        <p class="name-player">{{playerInTable[2]?.name}}</p>
+        <button *ngIf="playerInTable[2]?.id != -1 && playerInTable.length > 0 && playerInTable[2]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[2].id,playerInTable[2]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+      </div>
+    </div>
+    <div class="line-middle-2">
+      <div class="player">
+        <div class="notification" *ngIf="displayNotification[3] == true">
+          <P> {{listChatNotification[3].message}} </P>
+        </div>
+        <img [src]="'assets/img/player/' + playerInTable[3]?.pathIcon || '' " />
+        <p class="name-player">{{playerInTable[3]?.name}}</p>
+        <button *ngIf="playerInTable[3]?.id != -1 && playerInTable.length > 0 && playerInTable[3]?.id != idUser" class="chat-private"(click)="privateChat(playerInTable[3].id,playerInTable[3]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+      </div>
+      <div class="player">
+        <div class="notification" *ngIf="displayNotification[4] == true">
+          <P> {{listChatNotification[4].message}} </P>
+        </div>
+        <img [src]="'assets/img/player/' + playerInTable[4]?.pathIcon || '' " />
+        <p class="name-player">{{playerInTable[4]?.name}}</p>
+        <button *ngIf="playerInTable[4]?.id != -1 && playerInTable.length > 0 && playerInTable[4]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[4].id,playerInTable[4]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+      </div>
+    </div>
+    <div class="line-bottom">
+      <div class="player">
+        <div class="notification" *ngIf="displayNotification[5] == true">
+          <P> {{listChatNotification[5].message}} </P>
+        </div>
+        <img [src]="'assets/img/player/' + playerInTable[5]?.pathIcon || '' " />
+        <p class="name-player">{{playerInTable[5]?.name}}</p>
+        <button *ngIf="playerInTable[5]?.id != -1 && playerInTable.length > 0 && playerInTable[5]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[5].id,playerInTable[5]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="background" *ngIf="displayChatBoxPrivate" (click)="UnDisplayPrivateChat()"></div>
+
+  <div class="chat-private-box" *ngIf="displayChatBoxPrivate">
+    <div class="header">
+      <p> Essayez de le convaincre à vous suivre..</p>
+      <h5> {{nameBoxPrivateChat}} </h5>
+    </div>
+
+    <div class="chat-private-messages" >
+      <div [classList]="classChat(chat.idSender || -1) + ' chat'" *ngFor="let chat of currentLlistChat">
+        <div class="profil">
+          <img src="assets/img/profil-man.png" />
+        </div>
+        <div class="text-msg">
+          <h5> {{chat.nameSender}} </h5>
+          <p> {{chat.message}}</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="box-inputs private-chat-box">
+      <form [formGroup]="sendChatForm" (submit)="sendPrivateChat()">
+        <input #inputSendPrivateChat class="input-chat"  type="text" placeholder="Interagissez avec .." formControlName="message"/>
+        <input class="btn-send-chat" type="submit" value="envoyer" />
+      </form>
+    </div>
+  </div>
+
+  <div class="chat-public">
+    <div class="chat-box-public" *ngIf="displayChatBoxPublic" (click)="this.displayChatBoxPublic = false">
+
+
+      <div class="chat"*ngFor="let chat of chatInRoom">
+        <div class="profil">
+          <img src="assets/img/profil-man.png" />
+        </div>
+        <div class="text-msg">
+          <h5> {{chat.nameSender}} </h5>
+          <p> {{chat.message}}</p>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="box-inputs">
+      <form [formGroup]="sendChatForm" (submit)="sendPublicChat()">
+        <input (click)="displayChatBoxPublic = true" class="input-chat" type="text" placeholder="Votre message..." formControlName="message">
+        <input class="btn-send-chat" type="submit" />
+      </form>
+    </div>
+  </div>
+</div>

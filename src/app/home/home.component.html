@@ -1,0 +1,11 @@
+<div class="box_component">
+  <div class="box_content">
+    <h3 class="box_title"> Killer </h3>
+    <p class="box_desc"> Avez-vous les compétences nécessaires pour survivre ? </p>
+
+    <form [formGroup]="newUserForm" (submit)="addUser()" class="form" class="box_form">
+      <input class="input" type="text" placeholder="Votre nom" formControlName="name"/>
+      <input class="btn" type="submit" value="Jouer">
+    </form>
+  </div>
+</div>
