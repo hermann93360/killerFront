@@ -29,11 +29,20 @@ export class GameComponent implements OnInit {
   public currentDiscussion: Discussions | undefined = undefined
   public currentLlistChat: Chat[] | undefined = undefined
   public listChatNotification: Chat[] = [];
+  public alive: boolean = true;
 
 
   public idUser = UserService.idCurrentUser;
 
   public chatInRoom: Chat[] = [];
+
+  public timer: number = 45;
+  public start: boolean = false;
+  public state: boolean = true;
+  public introduce: boolean = false;
+  public displayDay: boolean = false;
+  public displayNight: boolean = false;
+  public displayTime: boolean = false;
 
   sendChatForm: FormGroup;
   displayNotification: boolean[] = [];
@@ -69,9 +78,67 @@ export class GameComponent implements OnInit {
 
   }
 
+  killUser(id: number) {
+
+  }
+
+  displayNightDescription() {
+    this.displayNight = true;
+    this.displayTime = false;
+
+    setTimeout(() => {
+      this.displayNight = false;
+      this.displayTime = true
+    }, 4000)
+  }
+
+  displayDayDescription() {
+    this.displayDay = true;
+    this.displayTime = false;
+
+    setTimeout(() => {
+      this.displayDay = false;
+      this.displayTime = true
+    }, 4000)
+  }
+
   ngOnInit(): void {
 
-    //view
+    //counter
+    this.userService.start.subscribe((s) => {
+
+      //we find a user kill
+      this.userService.idUserCurrentKill.subscribe((i) => {
+        this.killPlayerInTable(i);
+      })
+
+      if(s) {
+        this.start = s;
+        this.introduce = true;
+        setTimeout(() => {
+          this.introduce = false;
+        }, 3500)
+      }
+      this.userService.counter.subscribe((t) => {
+        this.timer = t;
+      })
+      this.userService.state.subscribe((st) => {
+        this.state = st;
+        if(this.start) {
+          if(st) {
+            this.displayDayDescription();
+            this.playerInTable.forEach((p) => p.resetVote())
+            this.alive = <boolean>this.searchPlayerInTable(UserService.idCurrentUser)?.alive
+          } else {
+            this.displayNightDescription();
+          }
+        }
+      })
+
+      this.userService.votes.subscribe((v) => {
+        this.addVoteForPlayerInTable(v.idTargetUser, <number>v.numberOfVoteTargetUser);
+      })
+    })
 
 
     this.userService.lastChat.subscribe((c: Chat) => {
@@ -170,6 +237,17 @@ export class GameComponent implements OnInit {
 
   }
 
+  addVoteForPlayerInTable(id: number, vote: number) {
+    this.searchPlayerInTable(id)?.addVote(vote);
+  }
+  killPlayerInTable(id: number) {
+    this.searchPlayerInTable(id)?.kill();
+  }
+
+  searchPlayerInTable(id: number) {
+    return this.playerInTable.find((p) => p.id == id)
+  }
+
   searchCurrentDiscussion(idUser: number): Discussions | undefined{
     console.log(idUser + ' ' + UserService.idCurrentUser)
     console.log(this.discussions)
@@ -183,4 +261,7 @@ export class GameComponent implements OnInit {
   }
 
 
+  vote(idTarget: number) {
+    this.userService.vote(idTarget);
+  }
 }

@@ -9,7 +9,10 @@
         </div>
         <img [src]=" 'assets/img/player/' + playerInTable[0]?.pathIcon || '' "  />
         <p class="name-player">{{playerInTable[0]?.name}}</p>
-        <button *ngIf="playerInTable[0]?.id != -1 && playerInTable.length > 0 && playerInTable[0]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[0].id, playerInTable[0]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[0]?.alive && state && playerInTable[0]?.id != -1 && playerInTable.length > 0 && playerInTable[0]?.id != idUser && alive" class="btn-player-in-table chat-private" (click)="privateChat(playerInTable[0].id, playerInTable[0]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[0]?.alive && !state && playerInTable[0]?.id != idUser" class="btn-player-in-table vote" (click)="vote(playerInTable[0].id)"> <i class="bi bi-chat-dots-fill"></i> Voter </button>
+        <p class="d-vote" *ngIf="!state">{{playerInTable[0]?.vote }}</p>
+        <p class="d-vote" *ngIf="start && !playerInTable[0]?.alive"><i class="bi bi-safe-fill"></i></p>
       </div>
     </div>
 
@@ -20,7 +23,10 @@
         </div>
         <img [src]="'assets/img/player/' + playerInTable[1]?.pathIcon || '' " />
         <p class="name-player">{{playerInTable[1]?.name}}</p>
-        <button *ngIf="playerInTable[1]?.id != -1 && playerInTable.length > 0 && playerInTable[1]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[1].id,playerInTable[1]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[1]?.alive && state && playerInTable[1]?.id != -1 && playerInTable.length > 0 && playerInTable[1]?.id != idUser && alive" class="btn-player-in-table chat-private" (click)="privateChat(playerInTable[1].id,playerInTable[1]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[1]?.alive && !state && playerInTable[1]?.id != idUser" class="btn-player-in-table vote" (click)="vote(playerInTable[1].id)"> <i class="bi bi-chat-dots-fill"></i> Voter </button>
+        <p class="d-vote" *ngIf="!state">{{playerInTable[1]?.vote }}</p>
+        <p class="d-vote" *ngIf="start && !playerInTable[1]?.alive"><i class="bi bi-safe-fill"></i></p>
       </div>
       <div class="player">
         <div class="notification" *ngIf="displayNotification[2] == true">
@@ -28,7 +34,10 @@
         </div>
         <img [src]="'assets/img/player/' + playerInTable[2]?.pathIcon || '' " />
         <p class="name-player">{{playerInTable[2]?.name}}</p>
-        <button *ngIf="playerInTable[2]?.id != -1 && playerInTable.length > 0 && playerInTable[2]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[2].id,playerInTable[2]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[2]?.alive && state && playerInTable[2]?.id != -1 && playerInTable.length > 0 && playerInTable[2]?.id != idUser && alive" class="btn-player-in-table chat-private" (click)="privateChat(playerInTable[2].id,playerInTable[2]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[2]?.alive && !state && playerInTable[2]?.id != idUser" class="btn-player-in-table vote" (click)="vote(playerInTable[2].id)"> <i class="bi bi-chat-dots-fill"></i> Voter </button>
+        <p class="d-vote" *ngIf="!state">{{playerInTable[2]?.vote }}</p>
+        <p class="d-vote" *ngIf="start && !playerInTable[2]?.alive"><i class="bi bi-safe-fill"></i></p>
       </div>
     </div>
     <div class="line-middle-2">
@@ -38,7 +47,10 @@
         </div>
         <img [src]="'assets/img/player/' + playerInTable[3]?.pathIcon || '' " />
         <p class="name-player">{{playerInTable[3]?.name}}</p>
-        <button *ngIf="playerInTable[3]?.id != -1 && playerInTable.length > 0 && playerInTable[3]?.id != idUser" class="chat-private"(click)="privateChat(playerInTable[3].id,playerInTable[3]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[3]?.alive && state && playerInTable[3]?.id != -1 && playerInTable.length > 0 && playerInTable[3]?.id != idUser && alive" class="btn-player-in-table chat-private"(click)="privateChat(playerInTable[3].id,playerInTable[3]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[3]?.alive && !state && playerInTable[3]?.id != idUser" class="btn-player-in-table vote" (click)="vote(playerInTable[3].id)"> <i class="bi bi-chat-dots-fill"></i> Voter </button>
+        <p class="d-vote" *ngIf="!state">{{playerInTable[3]?.vote }}</p>
+        <p class="d-vote" *ngIf="start && !playerInTable[3]?.alive"><i class="bi bi-safe-fill"></i></p>
       </div>
       <div class="player">
         <div class="notification" *ngIf="displayNotification[4] == true">
@@ -46,7 +58,10 @@
         </div>
         <img [src]="'assets/img/player/' + playerInTable[4]?.pathIcon || '' " />
         <p class="name-player">{{playerInTable[4]?.name}}</p>
-        <button *ngIf="playerInTable[4]?.id != -1 && playerInTable.length > 0 && playerInTable[4]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[4].id,playerInTable[4]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[4]?.alive && state && playerInTable[4]?.id != -1 && playerInTable.length > 0 && playerInTable[4]?.id != idUser && alive" class="btn-player-in-table chat-private" (click)="privateChat(playerInTable[4].id,playerInTable[4]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[4]?.alive && !state && playerInTable[4]?.id != idUser" class="btn-player-in-table vote" (click)="vote(playerInTable[4].id)"> <i class="bi bi-chat-dots-fill"></i> Voter </button>
+        <p class="d-vote" *ngIf="!state">{{playerInTable[4]?.vote }}</p>
+        <p class="d-vote" *ngIf="start && !playerInTable[4]?.alive"><i class="bi bi-safe-fill"></i></p>
       </div>
     </div>
     <div class="line-bottom">
@@ -56,7 +71,11 @@
         </div>
         <img [src]="'assets/img/player/' + playerInTable[5]?.pathIcon || '' " />
         <p class="name-player">{{playerInTable[5]?.name}}</p>
-        <button *ngIf="playerInTable[5]?.id != -1 && playerInTable.length > 0 && playerInTable[5]?.id != idUser" class="chat-private" (click)="privateChat(playerInTable[5].id,playerInTable[5]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[5]?.alive && state && playerInTable[5]?.id != -1 && playerInTable.length > 0 && playerInTable[5]?.id != idUser && alive" class="btn-player-in-table chat-private" (click)="privateChat(playerInTable[5].id,playerInTable[5]?.name || '')"> <i class="bi bi-chat-dots-fill"></i> Discuter </button>
+        <button *ngIf="playerInTable[5]?.alive && !state && playerInTable[5]?.id != idUser" class="btn-player-in-table vote" (click)="vote(playerInTable[5].id)"> <i class="bi bi-chat-dots-fill"></i> Voter </button>
+        <p>{{playerInTable[5]?.vote }}</p>
+        <p class="d-vote" *ngIf="!state">{{playerInTable[5]?.vote }}</p>
+        <p class="d-vote" *ngIf="start && !playerInTable[5]?.alive"><i class="bi bi-safe-fill"></i></p>
       </div>
     </div>
   </div>
@@ -111,5 +130,26 @@
         <input class="btn-send-chat" type="submit" />
       </form>
     </div>
+  </div>
+
+  <div class="counter">
+
+    <div class="pending" *ngIf="!start">
+      <p>En attente de tous les joueurs</p>
+    </div>
+
+    <div class="pending day" *ngIf="displayDay">
+      <p>Le jour se leve dans KiribuCity, Discutez avec tout le monde
+      pour creer des alliances et ainsi survivres</p>
+    </div>
+
+    <div class="pending night" *ngIf="displayNight">
+      <p>Il fait nuit. Il est maintenant l'heure de voter BONNE CHANCE</p>
+    </div>
+
+    <div class="timer" *ngIf="start && !introduce && displayTime">
+      <h4>{{timer}}</h4>
+    </div>
+
   </div>
 </div>

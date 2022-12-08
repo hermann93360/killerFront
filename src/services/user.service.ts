@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {User} from "../model/User";
 import {Room} from "../model/Room";
 import {WeksocketService} from "./weksocket.service";
@@ -9,6 +9,7 @@ import {HttpClient} from "@angular/common/http";
 import {Chat} from "../model/Chat";
 import {Discussions} from "../model/Discussions";
 import {environment} from "../environments/environment";
+import {Vote} from "../model/Vote";
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,14 @@ export class UserService {
 
   public lastChat: BehaviorSubject<Chat> = new BehaviorSubject<any>('');
 
+  public counter: BehaviorSubject<number> = new BehaviorSubject<number>(20);
+  public start: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public state: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public idUserCurrentKill: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
+  public votes: Subject<Vote> = new Subject<Vote>();
+
   public discussionsInMyRoomShared: BehaviorSubject<Discussions[]> = new BehaviorSubject<Discussions[]>([])
   public discussionsInMyRoom: Discussions[] = [];
-
 
   public roomShared: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([])
   public room: Room[] = [];
@@ -147,8 +153,31 @@ export class UserService {
         this.lastChat.next(chat);
 
       })
-    })
-      .then(() => {
+
+      this.webSocketService.subscribe("socket/startInRoom/" + idRoom, (event) => {
+        this.start.next(true);
+
+        this.webSocketService.subscribe("socket/counter/" + idRoom, (event) => {
+          this.counter.next(event.body.timer)
+        })
+        this.webSocketService.subscribe("socket/day/" + idRoom, (event) => {
+          const user: User = event.body;
+          this.killUser(user.id);
+          this.state.next(true);
+        })
+        this.webSocketService.subscribe("socket/night/" + idRoom, (event) => {
+          console.log("it's night")
+          this.state.next(false);
+        })
+        this.webSocketService.subscribe("socket/votePublic/" + idRoom, (event) => {
+          console.log(event.body.idTargetUser + " a : " + event.body.numberOfVoteTargetUser + " vote(s)");
+          const vote = event.body;
+          this.votes.next(vote);
+        })
+
+      })
+
+    }).then(() => {
       this.webSocketService.send("/joinRoom", joinRoom);
     })
   }
@@ -245,7 +274,12 @@ export class UserService {
     this.webSocketService.send("sendPrivateChat", chat);
   }
 
-  receiveNotification() {
+  vote(idTarget : number) {
+    const vote = new Vote(UserService.idCurrentUser, idTarget, this.currentRoom.value.id || -1);
+    this.webSocketService.send("vote", vote);
+  }
 
+  private killUser(id: number | undefined) {
+    this.idUserCurrentKill.next(id || -1);
   }
 }
