@@ -106,6 +106,7 @@ export class GameComponent implements OnInit {
 
     //counter
     this.userService.start.subscribe((s) => {
+      this.start = s;
 
       //we find a user kill
       this.userService.idUserCurrentKill.subscribe((i) => {
@@ -113,7 +114,6 @@ export class GameComponent implements OnInit {
       })
 
       if(s) {
-        this.start = s;
         this.introduce = true;
         setTimeout(() => {
           this.introduce = false;
