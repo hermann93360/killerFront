@@ -1,5 +1,5 @@
 export class PlayerInTable {
-  public alive: boolean
+  public alive: boolean = true;
   public vote: number
 
   constructor(
@@ -7,7 +7,6 @@ export class PlayerInTable {
     public name: string,
     public id: number,
   ) {
-    this.alive = true;
     this.vote = 0;
   }
 

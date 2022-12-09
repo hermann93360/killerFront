@@ -34,7 +34,7 @@ export class UserService {
   public counter: BehaviorSubject<number> = new BehaviorSubject<number>(20);
   public start: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public state: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public idUserCurrentKill: BehaviorSubject<number> = new BehaviorSubject<number>(-1);
+  public idUserCurrentKill: Subject<number> = new Subject<number>();
   public votes: Subject<Vote> = new Subject<Vote>();
 
   public discussionsInMyRoomShared: BehaviorSubject<Discussions[]> = new BehaviorSubject<Discussions[]>([])
